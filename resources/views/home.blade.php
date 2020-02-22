@@ -398,60 +398,17 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="expert_active owl-carousel">
+                        @foreach($doctors as $doctor)
                         <div class="single_expert">
                             <div class="expert_thumb">
                                 <img src="img/experts/1.png" alt="">
                             </div>
                             <div class="experts_name text-center">
-                                <h3>Mirazul Alom</h3>
-                                <span>Neurologist</span>
+                                <h3>{{$doctor['name']}}</h3>
+                                <span>{{$doctor['type']}}</span>
                             </div>
                         </div>
-                        <div class="single_expert">
-                            <div class="expert_thumb">
-                                <img src="img/experts/2.png" alt="">
-                            </div>
-                            <div class="experts_name text-center">
-                                <h3>Mirazul Alom</h3>
-                                <span>Neurologist</span>
-                            </div>
-                        </div>
-                        <div class="single_expert">
-                            <div class="expert_thumb">
-                                <img src="img/experts/3.png" alt="">
-                            </div>
-                            <div class="experts_name text-center">
-                                <h3>Mirazul Alom</h3>
-                                <span>Neurologist</span>
-                            </div>
-                        </div>
-                        <div class="single_expert">
-                            <div class="expert_thumb">
-                                <img src="img/experts/4.png" alt="">
-                            </div>
-                            <div class="experts_name text-center">
-                                <h3>Mirazul Alom</h3>
-                                <span>Neurologist</span>
-                            </div>
-                        </div>
-                        <div class="single_expert">
-                            <div class="expert_thumb">
-                                <img src="img/experts/1.png" alt="">
-                            </div>
-                            <div class="experts_name text-center">
-                                <h3>Mirazul Alom</h3>
-                                <span>Neurologist</span>
-                            </div>
-                        </div>
-                        <div class="single_expert">
-                            <div class="expert_thumb">
-                                <img src="img/experts/2.png" alt="">
-                            </div>
-                            <div class="experts_name text-center">
-                                <h3>Mirazul Alom</h3>
-                                <span>Neurologist</span>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
