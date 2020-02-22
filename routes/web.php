@@ -21,6 +21,12 @@ Route::get('/services', function() {
 Route::get('/news', function(){
     return "News";
 })->name('news');
+//News
+Route::get('/news/{date}/{slug}', function($date, $slug){
+    echo $date;
+    echo "<br>";
+    echo $slug;
+})->name('news');
 //About us
 Route::get('/about-us', function(){
     return "News";
