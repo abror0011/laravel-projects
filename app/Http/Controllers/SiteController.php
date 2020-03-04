@@ -36,6 +36,7 @@ class SiteController extends Controller
         //Model::first()
         $posts = Post::orderBy('id', 'DESC')->paginate(2);
         $links = $posts->links();
+        
         return view('news', compact('posts', 'links'));
     }
 
