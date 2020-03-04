@@ -24,3 +24,7 @@ Route::get('/about-us', function(){
 })->name('about');
 //Contact
 Route::get('/feedback', 'SiteController@contact')->name('contact');
+//Admin routes
+Route::prefix('admin')->group(function(){
+    Route::resource('posts', 'Admin\\PostsController');
+});
