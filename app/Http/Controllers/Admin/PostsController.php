@@ -46,7 +46,7 @@ class PostsController extends Controller
 
         Post::create($request->post());
 
-        return redirect()->route('posts.index');
+        return redirect()->route('admin.posts.index')->with('success', 'Item created!');
     }
 
     /**
@@ -57,7 +57,9 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        //
+        $post = Post::findOrFail($id);
+
+        return view('admin.posts.show', compact('post'));
     }
 
     /**
@@ -68,7 +70,9 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        return $id;
+        $post = Post::findOrFail($id);
+
+        return view('admin.posts.edit', compact('post'));
     }
 
     /**
@@ -80,7 +84,21 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post = Post::findOrFail($id);
+        
+        $request->validate([
+            'title' => 'required',
+            'short' => 'required',
+            'content' => 'required|min:50'
+        ]);
+
+        $post->update([
+            'title' => $request->post('title'),
+            'short' => $request->post('short'),
+            'content' => $request->post('content')
+        ]);
+
+        return redirect()->route('admin.posts.index')->with(['success' => 'Item updated!']);
     }
 
     /**
@@ -95,6 +113,6 @@ class PostsController extends Controller
 
         $model->delete();
 
-        return redirect()->route('posts.index');
+        return redirect()->route('admin.posts.index')->with('delete', 'Item deleted!');
     }
 }
