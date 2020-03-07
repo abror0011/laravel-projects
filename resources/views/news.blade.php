@@ -34,7 +34,7 @@
                             </div>
 
                             <div class="blog_details">
-                                <a class="d-inline-block" href="single-blog.html">
+                                <a class="d-inline-block" href="{{route('newsMore')}}">
                                     <h2>{{$post->title}}</h2>
                                 </a>
                                 <p>{{$post->short}}</p>
