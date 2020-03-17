@@ -22,12 +22,16 @@
         @endif
         <table class="table table-bordered">
             <thead>
+                <th width="100px">Rasm</th>
                 <th>Sarlavha</th>
                 <th width="280px">Amallar</th>
             </thead>
             <tbody>
                 @foreach($posts as $post)
                 <tr>
+                    <td>
+                        <img class="img img-thumbnail" width="80px" src="{{ '/storage/'.$post->thumb }}" alt="{{ $post->title }}">
+                    </td>
                     <td>{{$post->title}}</td>
                     <td>
                         <a href="{{route('admin.posts.show', $post->id)}}" class="btn text-white btn-success btn-sm float-left "><i class="fa fa-eye"></i></>

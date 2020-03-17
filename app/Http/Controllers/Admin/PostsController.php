@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Post;
+use Image;
 
 class PostsController extends Controller
 {
@@ -46,9 +47,29 @@ class PostsController extends Controller
             'picture' => 'required|file|mimes:jpeg,jpg,png'
         ]);        
         //Upload image to storage
-        $request->file('picture')->store('posts', ['disk' => 'public']);
+        $img_name = $request->file('picture')->store('posts', ['disk' => 'public']);
+        //Create thumbnail
+        $full_path = storage_path('app/public/'.$img_name);
+        $full_thumb_path = storage_path('app/public/thumbs/'.$img_name);
+        $thumb = Image::make($full_path);
+
+        //Proporsiya bilan qirqib olish
+        // $thumb->resize(350, 350, function($constraint) {
+        //     $constraint->aspectRatio();
+        // })->save($full_thumb_path);
+        //Kvadrat proporsiya
+        $thumb->fit(350, 350, function($constraint){
+            $constraint->aspectRatio();
+        })->save($full_thumb_path);
+
         //Create post item
-        Post::create($request->post());
+        Post::create([
+            'title' => $request->post('title'),
+            'short' => $request->post('short'),
+            'content' => $request->post('content'),
+            'img' => $img_name,
+            'thumb' => 'thumbs/'.$img_name
+        ]);
 
         return redirect()->route('admin.posts.index')->with('success', 'Item created!');
     }
