@@ -38,12 +38,16 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
+        //Validation rules
         $request->validate([
             'title' => 'required',
             'short' => 'required',
             'content' => 'required',
+            'picture' => 'required|file|mimes:jpeg,jpg,png'
         ]);        
-
+        //Upload image to storage
+        $request->file('picture')->store('posts', ['disk' => 'public']);
+        //Create post item
         Post::create($request->post());
 
         return redirect()->route('admin.posts.index')->with('success', 'Item created!');

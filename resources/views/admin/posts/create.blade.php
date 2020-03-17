@@ -18,11 +18,15 @@
                 </ul>
             </div>
         @endif
-        <form method="POST" action="{{ route('admin.posts.store') }}">
+        <form method="POST" enctype="multipart/form-data" action="{{ route('admin.posts.store') }}">
             @csrf
             <div class="form-group">
                 <label for="">Sarlavha</label>
                 <input class="form-control" name="title" type="text">
+            </div>
+            <div class="form-group">
+                <label for="">Rasm</label>
+                <input class="form-control" name="picture" type="file">
             </div>
             <div class="form-group">
                 <label for="">Qisqacha</label>
