@@ -26,7 +26,7 @@
                         @foreach($posts as $post)
                         <article class="blog_item">
                             <div class="blog_item_img">
-                                <img class="card-img rounded-0" src="img/blog/single_blog_1.png" alt="">
+                                <img class="card-img rounded-0" src="/storage/{{ $post->thumb }}" alt="">
                                 <a href="#" class="blog_item_date">
                                     <h3>{{$post->created_at->format('d')}}</h3>
                                     <p>{{$post->created_at->format('M')}}</p>
@@ -34,7 +34,7 @@
                             </div>
 
                             <div class="blog_details">
-                                <a class="d-inline-block" href="{{route('newsMore')}}">
+                                <a class="d-inline-block" href="{{route('news.more', $post->id)}}">
                                     <h2>{{$post->title}}</h2>
                                 </a>
                                 <p>{{$post->short}}</p>

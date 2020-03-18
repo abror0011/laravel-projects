@@ -34,7 +34,8 @@ class SiteController extends Controller
         //Model::get = massiv qaytaradi
         //Model::paginate() = massiv
         //Model::first()
-        $posts = Post::orderBy('id', 'DESC')->paginate(2);
+        // $posts = Post::orderBy('id', 'DESC')->paginate(2);
+        $posts = Post::latest()->paginate(2);
         $links = $posts->links();
         
         return view('news', compact('posts', 'links'));
@@ -43,10 +44,14 @@ class SiteController extends Controller
     public function newsMore($id)
     {
         $post = Post::findOrFail($id);
+        $post->increment('views');
         // dd($post);
 
+        $most_viewed = Post::mostViews()->get();
+
         return view('news-more', [
-            'post' => $post
+            'post' => $post,
+            'most_posts' => $most_viewed
         ]);
     }
 }
