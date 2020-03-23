@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use App\Feedback;
 
 class SiteController extends Controller
 {
@@ -16,11 +17,6 @@ class SiteController extends Controller
             ['name' => 'Nodir', 'type' => 'Test 2'],
         ];
         return view('home',compact('doctors')); //['doctors' => $doctors] <=> compact('doctors') 
-    }
-    
-    public function contact()
-    {
-        return view('contact');
     }
 
     public function services()
@@ -70,5 +66,31 @@ class SiteController extends Controller
         $links = $results->links();
 
         return view('search', compact('results', 'links'));
+    }
+    
+    public function contact()
+    {
+        return view('contact');
+    }
+
+    public function feedbackStore(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|min:3|max:100',
+            'email' => 'required|email|',
+            'subject' => 'required|min:10|max:128',
+            'message' => 'required|max:2048'
+        ]);
+        
+        Feedback::create([
+            'name' => $request->post('name'),
+            'email' => $request->post('email'),
+            'subject' => $request->post('subject'),
+            'message' => $request->post('message')
+        ]);
+        
+        return redirect()
+                ->route('contact')
+                ->with('success', 'Xabar uchun rahmat! Tez orada sizga javob qaytaramiz.');
     }
 }

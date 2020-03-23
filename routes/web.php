@@ -24,6 +24,7 @@ Route::get('/about-us', function(){
 })->name('about');
 //Contact
 Route::get('/feedback', 'SiteController@contact')->name('contact');
+Route::post('/feedback', 'SiteController@feedbackStore')->name('contact.store');
 //Search
 Route::get('/search', 'SiteController@search')->name('search');
 //Admin routes
