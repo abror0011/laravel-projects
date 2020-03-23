@@ -24,6 +24,8 @@ Route::get('/about-us', function(){
 })->name('about');
 //Contact
 Route::get('/feedback', 'SiteController@contact')->name('contact');
+//Search
+Route::get('/search', 'SiteController@search')->name('search');
 //Admin routes
 Route::namespace('Admin')->middleware('auth')->name('admin.')->prefix('admin')->group(function(){
     Route::get('/', function() {

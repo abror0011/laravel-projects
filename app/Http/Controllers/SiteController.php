@@ -54,4 +54,21 @@ class SiteController extends Controller
             'most_posts' => $most_viewed
         ]);
     }
+
+    public function search(Request $request)
+    {
+        //SQL code:
+        //SELECT * FROM `posts` 
+        //WHERE `title` LIKE '%sar%' OR `short` LIKE '%sar%' OR `content` LIKE '%Sar%'
+        $key = $request->get('key');
+        $key = '%'.trim($key).'%';
+        $results = Post::where('title', 'LIKE', $key)
+                       ->orWhere('short', 'LIKE', $key)
+                       ->orWhere('content', 'LIKE', $key)
+                       ->paginate(10);
+        // dd($results->toSql());
+        $links = $results->links();
+
+        return view('search', compact('results', 'links'));
+    }
 }
