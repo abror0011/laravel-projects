@@ -10,16 +10,7 @@
         </h6>
     </div>
     <div class="card-body">
-        @if(session()->has('success'))
-            <div class="alert alert-success">
-                {{session()->get('success')}}
-            </div>
-        @endif
-        @if(session()->has('delete'))
-            <div class="alert alert-danger">
-                {{session()->get('delete')}}
-            </div>
-        @endif
+        @include('admin.alerts.main')
         <table class="table table-bordered">
             <thead>
                 <th width="100px">Rasm</th>
@@ -56,6 +47,7 @@
                 @endforeach
             </tbody>
         </table>
+        {{$posts->links()}}
     </div>
 </div>
 @endsection

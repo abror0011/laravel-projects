@@ -10,7 +10,8 @@ class FeedbacksController extends Controller
 {
     public function index()
     {
-        $items = Feedback::latest()->paginate(10);
+        $page_size = env('ADMIN_PAGE_SIZE', 15);
+        $items = Feedback::latest()->paginate($page_size);
         $links = $items->links();
 
         return view('admin.feedbacks.index', compact('items', 'links'));

@@ -8,11 +8,7 @@
         </h6>
     </div>
     <div class="card-body">
-        @if(session()->has('delete'))
-            <div class="alert alert-danger">
-                {{session()->get('delete')}}
-            </div>
-        @endif
+        @include('admin.alerts.main')
         <table class="table table-bordered">
             <thead>
                 <th>To'liq nomi</th>
@@ -50,6 +46,7 @@
                 @endforeach
             </tbody>
         </table>
+        {{$links}}
     </div>
 </div>
 @endsection
