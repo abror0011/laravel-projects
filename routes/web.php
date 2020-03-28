@@ -32,6 +32,11 @@ Route::namespace('Admin')->middleware('auth')->name('admin.')->prefix('admin')->
     Route::get('/', function() {
         return redirect()->route('admin.posts.index');
     })->name('dashboard');
+    //Profile
+    Route::get('/profile', 'ProfileController@index')->name('profile.index');
+    Route::put('/profile/update', 'ProfileController@update')->name('profile.update');
+    Route::put('/profile/password', 'ProfileController@password')->name('profile.password');
+    //Posts
     Route::resource('posts', 'PostsController');
     //Feedback routes
     Route::get('feedbacks', 'FeedbacksController@index')->name('feedbacks.index');
