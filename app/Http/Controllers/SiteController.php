@@ -5,17 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 use App\Feedback;
+use App\Doctor;
 
 class SiteController extends Controller
 {
     public function home() 
     {
-        $doctors = [
-            ['name' => 'John Doe', 'type' => 'Stom'],
-            ['name' => 'Buster Keaton', 'type' => 'Lor'],
-            ['name' => 'Zafar', 'type' => 'Test'],
-            ['name' => 'Nodir', 'type' => 'Test 2'],
-        ];
+        $doctors = Doctor::all();
+
         return view('home',compact('doctors')); //['doctors' => $doctors] <=> compact('doctors') 
     }
 

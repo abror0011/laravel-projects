@@ -401,11 +401,11 @@
                         @foreach($doctors as $doctor)
                         <div class="single_expert">
                             <div class="expert_thumb">
-                                <img src="img/experts/1.png" alt="">
+                                <img src="{{asset('storage/'.$doctor->picture)}}" alt="{{$doctor->full_name}}">
                             </div>
                             <div class="experts_name text-center">
-                                <h3>{{$doctor['name']}}</h3>
-                                <span>{{$doctor['type']}}</span>
+                                <h3>{{$doctor->full_name}}</h3>
+                                <span>{{$doctor->special}}</span>
                             </div>
                         </div>
                         @endforeach
