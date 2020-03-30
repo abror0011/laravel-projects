@@ -9,7 +9,7 @@
         </h6>
     </div>
     <div class="card-body">
-        @include('admin.alets.main')
+        @include('admin.alerts.main')
         <form method="POST" enctype="multipart/form-data" action="{{ route('admin.posts.store') }}">
             @csrf
             <div class="form-group">
