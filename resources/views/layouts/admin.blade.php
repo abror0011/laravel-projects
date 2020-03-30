@@ -63,7 +63,12 @@
           <span>Maqolalar</span>
         </a>
       </li>
-      
+      <li class="nav-item {{ request()->is('admin/doctors*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('admin.doctors.index') }}">
+          <i class="fas fa-fw fa-users"></i>
+          <span>Doktorlar</span>
+        </a>
+      </li>
       <li class="nav-item {{ request()->is('admin/feedbacks*') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('admin.feedbacks.index') }}">
           <i class="fas fa-fw fa-envelope"></i>

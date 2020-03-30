@@ -38,6 +38,8 @@ Route::namespace('Admin')->middleware('auth')->name('admin.')->prefix('admin')->
     Route::put('/profile/password', 'ProfileController@password')->name('profile.password');
     //Posts
     Route::resource('posts', 'PostsController');
+    //Doctors
+    Route::resource('doctors', 'DoctorsController');
     //Feedback routes
     Route::get('feedbacks', 'FeedbacksController@index')->name('feedbacks.index');
     Route::get('feedbacks/{id}/show', 'FeedbacksController@show')->name('feedbacks.show');
