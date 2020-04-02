@@ -213,45 +213,37 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <!-- link that opens popup -->
 
     <!-- form itself end-->
-    <form id="test-form" class="white-popup-block mfp-hide">
+    <form method="POST" action="{{route('appointment')}}" id="test-form" class="white-popup-block mfp-hide">
+        @csrf
+        @method('post')
         <div class="popup_box ">
             <div class="popup_inner">
-                <h3>Make an Appointment</h3>
-                <form action="#">
+                <h3>Qabulga yozilish</h3>
+                <form>
                     <div class="row">
                         <div class="col-xl-6">
-                            <input id="datepicker" placeholder="Pick date">
+                            <input name="date" id="datepicker" placeholder="Sana tanlang">
                         </div>
                         <div class="col-xl-6">
-                            <input id="datepicker2" placeholder="Suitable time">
-                        </div>
-                        <div class="col-xl-6">
-                            <select class="form-select wide" id="default-select" class="">
-                                <option data-display="Select Department">Department</option>
-                                <option value="1">Eye Care</option>
-                                <option value="2">Physical Therapy</option>
-                                <option value="3">Dental Care</option>
+                            <select name="doctor" class="form-select wide" id="default-select">
+                                @foreach(App\Doctor::all() as $doctor)
+                                    <option value="{{$doctor->full_name}}">{{$doctor->full_name}}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="col-xl-6">
-                            <select class="form-select wide" id="default-select" class="">
-                                <option data-display="Doctors">Doctors</option>
-                                <option value="1">Mirazul Alom</option>
-                                <option value="2">Monzul Alom</option>
-                                <option value="3">Azizul Isalm</option>
-                            </select>
+                            <input type="text" name="name" placeholder="Ismingiz">
                         </div>
                         <div class="col-xl-6">
-                            <input type="text"  placeholder="Name">
-                        </div>
-                        <div class="col-xl-6">
-                            <input type="text"  placeholder="Phone no.">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text" id="basic-addon1">+998</span>
+                                </div>
+                                <input type="text" class="form-control" name="phone" placeholder="Misol: 907008090">
+                              </div>
                         </div>
                         <div class="col-xl-12">
-                            <input type="email"  placeholder="Email">
-                        </div>
-                        <div class="col-xl-12">
-                            <button type="submit" class="boxed-btn3">Confirm</button>
+                            <button type="submit" class="boxed-btn3">Qabulga yozilish</button>
                         </div>
                     </div>
                 </form>

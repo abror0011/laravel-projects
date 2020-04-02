@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Post;
 use App\Feedback;
 use App\Doctor;
+use App\Services\SendTelegramService;
 
 class SiteController extends Controller
 {
@@ -90,4 +91,34 @@ class SiteController extends Controller
                 ->route('contact')
                 ->with('success', 'Xabar uchun rahmat! Tez orada sizga javob qaytaramiz.');
     }
+
+    public function makeAppointment(Request $request)
+    {
+        $data = $request->validate([
+            'date' => 'required|date',
+            'doctor' => 'required',
+            'name' => 'required|min:3',
+            'phone' => 'required|min:9|max:9'
+        ]);
+        //Formatting
+        $message = 'Doktor: '.$data['doctor'].PHP_EOL;
+        $message .= 'Sana: '.$data['date'].PHP_EOL;
+        $message .= 'Ismi: '.$data['name'].PHP_EOL;
+        $message .= 'Telefon: '.$data['phone'];
+
+        //Save Feedback
+        Feedback::create([
+            'name' => $data['name'],
+            'email' => $data['phone'],
+            'subject' => 'Qabulga yozilish',
+            'message' => $message
+        ]);
+        //Send to telegram bot
+        SendTelegramService::send($message);
+
+        return redirect()
+                ->route('contact')
+                ->with('success', 'Qabul qilindi. Sizga tez orada telefon qilamiz! Katta rahmat.');
+    }
+    
 }
