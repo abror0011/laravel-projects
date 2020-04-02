@@ -23,7 +23,7 @@
             </tr>
             <tr>
                 <td class="font-weight-bold">Xabar</td>
-                <td>{{$item->message}}</td>
+                <td>{!! nl2br($item->message) !!}</td>
             </tr>
             <tr>
                 <td class="font-weight-bold">Sana</td>
