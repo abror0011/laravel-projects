@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="zxx">
+<html class="no-js" lang="{{app()->getLocale()}}">
 
 <head>
     <meta charset="utf-8">
@@ -40,14 +40,14 @@
                     <div class="row">
                         <div class="col-xl-6 col-md-6 ">
                             <div class="social_media_links">
-                                <a href="#">
-                                    <i class="fa fa-linkedin"></i>
+                                <a class="{{app()->getLocale() == 'uz' ? 'text-primary' : ''}}" href="{{route('lang.switch', 'uz')}}">
+                                    O'zbekcha
                                 </a>
-                                <a href="#">
-                                    <i class="fa fa-facebook"></i>
+                                <a class="{{app()->getLocale() == 'ru' ? 'text-primary' : ''}}" href="{{route('lang.switch', 'ru')}}">
+                                    Русский
                                 </a>
-                                <a href="#">
-                                    <i class="fa fa-google-plus"></i>
+                                <a class="{{app()->getLocale() == 'en' ? 'text-primary' : ''}}" href="{{route('lang.switch', 'en')}}">
+                                    English
                                 </a>
                             </div>
                         </div>
@@ -76,11 +76,11 @@
                             <div class="main-menu  d-none d-lg-block">
                                 <nav>
                                     <ul id="navigation">
-                                        <li><a class="active" href="{{ route('home') }}">Home</a></li>
-                                        <li><a href="{{ route('services') }}">Services</a></li>
-                                        <li><a href="{{ route('news') }}">News</a></li>
-                                        <li><a href="{{ route('about') }}">About us</a></li>
-                                        <li><a href="{{ route('contact') }}">Contact</a></li>
+                                        <li><a class="active" href="{{ route('home') }}">@lang('Bosh sahifa')</a></li>
+                                        <li><a href="{{ route('services') }}">@lang('Xizmatlar')</a></li>
+                                        <li><a href="{{ route('news') }}">@lang('Yangiliklar')</a></li>
+                                        <li><a href="{{ route('about') }}">@lang('Biz haqimizda')</a></li>
+                                        <li><a href="{{ route('contact') }}">@lang('Bog`lanish')</a></li>
                                     </ul>
                                 </nav>
                             </div>

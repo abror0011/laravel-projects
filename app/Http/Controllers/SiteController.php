@@ -120,5 +120,12 @@ class SiteController extends Controller
                 ->route('contact')
                 ->with('success', 'Qabul qilindi. Sizga tez orada telefon qilamiz! Katta rahmat.');
     }
+
+    public function switchLang($lang)
+    {
+        session()->put('lang', $lang);
+
+        return redirect()->back();
+    }
     
 }

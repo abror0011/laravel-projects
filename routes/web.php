@@ -13,6 +13,8 @@
 
 //Home page
 Route::get('/', 'SiteController@home')->name('home');
+//Switch language
+Route::get('lang/{lang}', 'SiteController@switchLang')->name('lang.switch');
 //Services page
 Route::get('/services', 'SiteController@services')->name('services');
 //News
