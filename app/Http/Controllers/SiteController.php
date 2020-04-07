@@ -128,4 +128,15 @@ class SiteController extends Controller
         return redirect()->back();
     }
     
+    public function test()
+    {
+        //$model = Post::findOrFail(4);
+
+        //dd($model->category->name);
+
+        $category = \App\Category::findOrFail(1);
+
+        dd($category->posts);
+    }
+
 }
