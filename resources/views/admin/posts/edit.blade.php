@@ -18,6 +18,17 @@
                 <input class="form-control" value="{{$post->title}}" name="title" type="text">
             </div>
             <div class="form-group">
+                <label for="">Turkum</label>
+                <select class="form-control" name="id_cat" id="">
+                    @foreach ($category_list as $item)
+                        <option value="{{$item->id}}"
+                            @if($item->id == $post->id_cat) selected @endif >
+                            {{$item->name}}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group">
                 <label for="">Rasm</label>
                 <input class="form-control" name="picture" type="file">
             </div>

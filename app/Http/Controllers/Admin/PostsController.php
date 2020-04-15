@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Post;
+use App\Category;
 use Image;
 use Illuminate\Support\Facades\Storage;
 
@@ -31,7 +32,9 @@ class PostsController extends Controller
      */
     public function create()
     {
-        return view('admin.posts.create');
+        $category_list = $this->getAllCategory();
+
+        return view('admin.posts.create', compact('category_list'));
     }
 
     /**
@@ -47,6 +50,7 @@ class PostsController extends Controller
             'title' => 'required',
             'short' => 'required',
             'content' => 'required',
+            'id_cat' => 'required',
             'picture' => 'required|file|mimes:jpeg,jpg,png'
         ]);        
         //Upload image to storage
@@ -71,7 +75,8 @@ class PostsController extends Controller
             'short' => $request->post('short'),
             'content' => $request->post('content'),
             'img' => $img_name,
-            'thumb' => 'thumbs/'.$img_name
+            'thumb' => 'thumbs/'.$img_name,
+            'id_cat' => $request->post('id_cat')
         ]);
 
         return redirect()->route('admin.posts.index')->with('success', 'Item created!');
@@ -99,8 +104,9 @@ class PostsController extends Controller
     public function edit($id)
     {
         $post = Post::findOrFail($id);
+        $category_list = $this->getAllCategory();
 
-        return view('admin.posts.edit', compact('post'));
+        return view('admin.posts.edit', compact('post', 'category_list'));
     }
 
     /**
@@ -117,7 +123,8 @@ class PostsController extends Controller
         $request->validate([
             'title' => 'required',
             'short' => 'required',
-            'content' => 'required|min:50'
+            'content' => 'required|min:50',
+            'id_cat' => 'required'
         ]);
         
         if ($request->file('picture')) {
@@ -150,7 +157,8 @@ class PostsController extends Controller
             'short' => $request->post('short'),
             'content' => $request->post('content'),
             'img' => $img_name,
-            'thumb' =>$thumb_name
+            'thumb' =>$thumb_name,
+            'id_cat' => $request->post('id_cat')
         ]);
 
         return redirect()->route('admin.posts.index')->with(['success' => 'Item updated!']);
@@ -169,5 +177,10 @@ class PostsController extends Controller
         $model->delete();
 
         return redirect()->route('admin.posts.index')->with('delete', 'Item deleted!');
+    }
+
+    private function getAllCategory()
+    {
+        return Category::all();
     }
 }
