@@ -134,9 +134,15 @@ class SiteController extends Controller
 
         //dd($model->category->name);
 
-        $category = \App\Category::findOrFail(1);
+        //$category = \App\Category::findOrFail(3);
 
-        dd($category->posts);
+        //dd($category->posts);
+        
+        // $user = \App\User::find(1);
+        // dd($user->roles);
+
+        $role = \App\Role::find(2);
+        dd($role->users);
     }
 
 }
