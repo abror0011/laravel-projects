@@ -23,7 +23,7 @@
                     <td>
                         <img class="img img-thumbnail" width="80px" src="{{ '/storage/'.$post->thumb }}" alt="{{ $post->title }}">
                     </td>
-                    <td>{{$post->title}}</td>
+                    <td>{{$post->translate('title')}}</td>
                     <td>
                         <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
                             <a target="_blank" href="{{route('news.more', $post->id)}}" class="btn btn-primary">

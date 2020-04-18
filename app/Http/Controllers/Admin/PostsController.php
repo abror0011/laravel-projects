@@ -47,9 +47,15 @@ class PostsController extends Controller
     {
         //Validation rules
         $request->validate([
-            'title' => 'required',
-            'short' => 'required',
-            'content' => 'required',
+            'title_uz' => 'required',
+            'short_uz' => 'required',
+            'content_uz' => 'required',
+            'title_ru' => 'required',
+            'short_ru' => 'required',
+            'content_ru' => 'required',
+            'title_en' => 'required',
+            'short_en' => 'required',
+            'content_en' => 'required',
             'id_cat' => 'required',
             'picture' => 'required|file|mimes:jpeg,jpg,png'
         ]);        
@@ -71,9 +77,18 @@ class PostsController extends Controller
 
         //Create post item
         Post::create([
-            'title' => $request->post('title'),
-            'short' => $request->post('short'),
-            'content' => $request->post('content'),
+            'title_uz' => $request->post('title_uz'),
+            'short_uz' => $request->post('short_uz'),
+            'content_uz' => $request->post('content_uz'),
+
+            'title_ru' => $request->post('title_ru'),
+            'short_ru' => $request->post('short_ru'),
+            'content_ru' => $request->post('content_ru'),
+
+            'title_en' => $request->post('title_en'),
+            'short_en' => $request->post('short_en'),
+            'content_en' => $request->post('content_en'),
+
             'img' => $img_name,
             'thumb' => 'thumbs/'.$img_name,
             'id_cat' => $request->post('id_cat')
@@ -121,9 +136,16 @@ class PostsController extends Controller
         $post = Post::findOrFail($id);
         
         $request->validate([
-            'title' => 'required',
-            'short' => 'required',
-            'content' => 'required|min:50',
+            'title_uz' => 'required',
+            'short_uz' => 'required',
+            'content_uz' => 'required',
+            'title_ru' => 'required',
+            'short_ru' => 'required',
+            'content_ru' => 'required',
+            'title_en' => 'required',
+            'short_en' => 'required',
+            'content_en' => 'required',
+            
             'id_cat' => 'required'
         ]);
         
@@ -153,9 +175,18 @@ class PostsController extends Controller
         }
 
         $post->update([
-            'title' => $request->post('title'),
-            'short' => $request->post('short'),
-            'content' => $request->post('content'),
+            'title_uz' => $request->post('title_uz'),
+            'short_uz' => $request->post('short_uz'),
+            'content_uz' => $request->post('content_uz'),
+
+            'title_ru' => $request->post('title_ru'),
+            'short_ru' => $request->post('short_ru'),
+            'content_ru' => $request->post('content_ru'),
+
+            'title_en' => $request->post('title_en'),
+            'short_en' => $request->post('short_en'),
+            'content_en' => $request->post('content_en'),
+            
             'img' => $img_name,
             'thumb' =>$thumb_name,
             'id_cat' => $request->post('id_cat')
