@@ -297,6 +297,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     $('.js-example-basic-multiple').select2();
 });
     </script>
+    @stack('scripts')
 </body>
 
 </html>

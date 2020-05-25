@@ -7,6 +7,7 @@ use App\Post;
 use App\Feedback;
 use App\Doctor;
 use App\Services\SendTelegramService;
+use Illuminate\Support\Facades\Validator;
 
 class SiteController extends Controller
 {
@@ -73,12 +74,21 @@ class SiteController extends Controller
 
     public function feedbackStore(Request $request)
     {
-        $request->validate([
+        $rules = [
             'name' => 'required|min:3|max:100',
             'email' => 'required|email|',
             'subject' => 'required|min:10|max:128',
             'message' => 'required|max:2048'
-        ]);
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'data' => $validator->errors()
+            ]);
+        }
         
         Feedback::create([
             'name' => $request->post('name'),
@@ -87,9 +97,10 @@ class SiteController extends Controller
             'message' => $request->post('message')
         ]);
         
-        return redirect()
-                ->route('contact')
-                ->with('success', 'Xabar uchun rahmat! Tez orada sizga javob qaytaramiz.');
+        return response()->json([
+            'status' => true,
+            'data' => 'Murojaat qabul qilindi!'
+        ]);
     }
 
     public function makeAppointment(Request $request)

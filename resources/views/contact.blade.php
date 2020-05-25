@@ -38,6 +38,8 @@
                                 </ul>
                             </div>
                         @endif
+                        <div class="alert alert-success contact-success" style="display: none;"></div>
+                        <div class="alert alert-danger contact-error" style="display: none;"></div>
                         <form class="form-contact contact_form" action="{{route('contact.store')}}" method="post" id="contactForm" novalidate="novalidate">
                             @csrf
                             <div class="row">
@@ -95,3 +97,31 @@
         </section>
     <!-- ================ contact section end ================= -->
 @endsection
+
+@push('scripts')
+<script>
+    $('#contactForm').submit( function(e) {
+        //Stop submit
+        e.preventDefault();
+        //Begin AJAX Request
+        $.ajax({
+            url: $(this).attr('action'),
+            type: 'POST',
+            dataType: 'JSON',
+            data: $(this).serialize(),
+            success: function(response) {
+                if (response.status) {
+                    $('.contact-error').text(response.data).slideDown();
+                }
+                else {
+                    $('.contact-error').text('');
+                    $.each(response.data, function(index, item){
+                        $('.contact-error').append(item[0]+'<br>');
+                    });
+                    $('.contact-error').slideDown();
+                }
+            }
+        });
+    });
+</script>
+@endpush
